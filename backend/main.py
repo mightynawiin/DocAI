@@ -2,14 +2,10 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import shutil
 import os
-
-# ✅ FIXED IMPORTS
 from backend.document_loader import load_document
-from backend.qa_engine import QAEngine
 
 app = FastAPI(title="Document Q&A App")
 
-# ✅ CORS for frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -21,10 +17,11 @@ app.add_middleware(
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-qa_engine = QAEngine()
+qa_engine = None  # ✅ LAZY LOAD - FIXED!
 
 @app.post("/upload")
 async def upload_document(file: UploadFile = File(...)):
+    global qa_engine
     if not file:
         raise HTTPException(status_code=400, detail="No file provided")
     
@@ -35,26 +32,28 @@ async def upload_document(file: UploadFile = File(...)):
             shutil.copyfileobj(file.file, buffer)
         
         text = load_document(file_path)
+        qa_engine = QAEngine()  # ✅ CREATE HERE (after env vars load)
         qa_engine.build_index(text)
         
         return {"message": "Document uploaded and indexed successfully", "filename": file.filename}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
 
-@app.get("/summary")  # ✅ MISSING ENDPOINT ADDED
+@app.get("/summary")
 async def get_summary():
-    if not qa_engine.document_text:
+    global qa_engine
+    if not qa_engine or not qa_engine.document_text:
         raise HTTPException(status_code=400, detail="No document uploaded")
     
-    # Simple summary (3-sentence version of document)
     sentences = qa_engine.document_text.split('.')[:3]
     summary = '. '.join(sentences) + '.'
-    return {"summary": summary or "Document processed successfully - ready for questions!"}
+    return {"summary": summary or "Document ready!"}
 
 @app.post("/ask")
 async def ask_question(question: str):
-    if not question:
-        raise HTTPException(status_code=400, detail="Question required")
+    global qa_engine
+    if not qa_engine:
+        raise HTTPException(status_code=400, detail="No document uploaded")
     
     try:
         answer = qa_engine.ask(question)
