@@ -1,15 +1,12 @@
 import os
-from dotenv import load_dotenv
 from groq import Groq
-
-# ✅ LOAD .env FIRST (Railway + local both work)
-load_dotenv()
 
 class QAEngine:
     def __init__(self):
+        # ✅ Railway/Local BOTH work - NO dotenv needed
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
-            raise ValueError("GROQ_API_KEY not found in .env or environment")
+            raise ValueError("GROQ_API_KEY missing - set in Railway Variables or local .env")
         
         self.client = Groq(api_key=api_key)
         self.document_text = ""
@@ -20,14 +17,10 @@ class QAEngine:
     
     def ask(self, question: str) -> str:
         if not self.document_text:
-            return "❌ No document uploaded. Please upload first."
+            return "❌ No document uploaded first."
         
-        prompt = f"""<document>
-{self.document_text}
-</document>
-
+        prompt = f"""<document>{self.document_text}</document>
 QUESTION: {question}
-
 ANSWER:"""
         
         try:
@@ -39,5 +32,4 @@ ANSWER:"""
             )
             return response.choices[0].message.content.strip()
         except Exception as e:
-            return f"Error: {str(e)}"
-
+            return f"Groq error: {str(e)}"
