@@ -3,6 +3,16 @@ from fastapi.middleware.cors import CORSMiddleware
 import shutil
 import os
 
+@app.get("/test-env")
+async def test_env():
+    import os
+    groq_key = os.getenv("GROQ_API_KEY")
+    return {
+        "groq_key_set": groq_key is not None,
+        "key_preview": groq_key[:10] + "..." if groq_key else None
+    }
+
+
 # ✅ FIXED: Import at TOP (not inside function)
 from backend.document_loader import load_document
 from backend.qa_engine import QAEngine  # ← CRITICAL!
