@@ -21,26 +21,66 @@
             overflow-x: hidden;
         }
 
-        /* Landing Page */
+        /* TOP NAVBAR */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            backdrop-filter: blur(18px);
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.65));
+            border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 12px;
+            background: conic-gradient(from 180deg, #3b82f6, #ec4899, #a855f7, #22c55e, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0b1120;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .brand-name {
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            font-size: 1.1rem;
+        }
+
+        /* LANDING SECTION */
         .landing {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             padding: 120px 24px 40px;
             position: relative;
             overflow: hidden;
         }
 
-        .landing::before {
-            content: '';
+        .landing-gradient-orbit {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.02)"/><circle cx="50" cy="10" r="0.8" fill="rgba(255,255,255,0.01)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            width: 560px;
+            height: 560px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.16), transparent 60%);
+            top: -60px;
+            right: -120px;
+            filter: blur(4px);
             pointer-events: none;
         }
 
@@ -48,169 +88,243 @@
             max-width: 1120px;
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 3fr 2.6fr;
             gap: 40px;
             position: relative;
             z-index: 1;
         }
 
-        .hero-content h1 {
-            font-size: clamp(2.8rem, 5vw, 4.2rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #3b82f6 0%, #ec4899 50%, #10b981 100%);
+        .hero-copy h1 {
+            font-size: clamp(2.6rem, 4.6vw, 3.8rem);
+            line-height: 1.05;
+            letter-spacing: -0.06em;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, #e5e7eb, #bfdbfe, #f9a8d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
         }
 
-        .hero-content p {
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-            line-height: 1.6;
+        .hero-sub {
+            font-size: 1.05rem;
+            max-width: 540px;
+            line-height: 1.7;
+            color: #94a3b8;
+            margin-bottom: 22px;
         }
 
-        .cta-button {
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .pill {
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), rgba(15, 23, 42, 0.7));
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 18px 36px;
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
-            text-decoration: none;
+            gap: 6px;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 45px rgba(59, 130, 246, 0.5);
+        .pill i {
+            font-size: 0.75rem;
+            color: #60a5fa;
+        }
+
+        .hero-cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .hero-primary-btn {
+            border: none;
+            cursor: pointer;
+            padding: 14px 26px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            font-weight: 600;
+            font-size: 0.98rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 18px 45px rgba(37, 99, 235, 0.45);
+        }
+
+        .hero-primary-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 22px 60px rgba(37, 99, 235, 0.65);
+        }
+
+        /* PREVIEW CARD */
+        .hero-preview {
+            position: relative;
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.85));
+            border-radius: 24px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: 0 24px 80px rgba(15, 23, 42, 0.85), 0 0 25px rgba(59, 130, 246, 0.3);
+            padding: 20px 18px 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         /* Main App */
         .app-container {
             display: none;
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            min-height: calc(100vh - 80px);
+            margin: 90px auto 40px;
+            padding: 0 16px;
+            min-height: calc(100vh - 90px);
         }
 
-        /* Sidebar Navigation */
+        .app-header {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .app-header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #3b82f6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .app-main {
+            display: grid;
+            grid-template-columns: 260px minmax(0, 1fr);
+            gap: 18px;
+        }
+
+        /* Sidebar */
         .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 280px;
-            height: 100vh;
-            background: rgba(15, 20, 25, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 40px 24px;
-            transform: translateX(-100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1000;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            height: fit-content;
+            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            padding: 16px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .sidebar.open {
-            transform: translateX(0);
-        }
-
-        .sidebar-toggle {
-            position: fixed;
-            left: 20px;
-            top: 20px;
-            z-index: 1001;
-            background: rgba(15, 20, 25, 0.9);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 12px;
-            color: #e2e8f0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-toggle:hover {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
+        .sidebar-title {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #64748b;
+            margin-bottom: 4px;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 14px 20px;
-            margin-bottom: 8px;
-            border-radius: 10px;
+            gap: 10px;
+            padding: 10px 11px;
+            margin-bottom: 2px;
+            border-radius: 12px;
             color: #94a3b8;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 0.88rem;
             cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .nav-item-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 42, 1);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            font-size: 0.8rem;
+        }
+
+        .nav-item-desc {
+            font-size: 0.74rem;
+            color: #64748b;
         }
 
         .nav-item.active,
         .nav-item:hover {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(236, 72, 153, 0.2));
-            color: #e2e8f0;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .nav-item i {
-            width: 20px;
-            font-size: 1.1rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.24), rgba(236, 72, 153, 0.22));
+            color: #e5e7eb;
+            border: 1px solid rgba(59, 130, 246, 0.65);
         }
 
         /* Chat Container */
         .chat-container {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
+            background: rgba(15, 23, 42, 0.97);
+            backdrop-filter: blur(18px);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            height: 75vh;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            height: 70vh;
             padding: 0;
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            margin-left: 300px;
+            box-shadow: 0 25px 70px rgba(15, 23, 42, 0.95);
             display: flex;
             flex-direction: column;
         }
 
-        .chat-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 1.1rem;
-            font-weight: 600;
+        .chat-header-bar {
+            padding: 10px 16px 8px;
+            border-bottom: 1px solid rgba(30, 64, 175, 0.7);
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
+            font-size: 0.8rem;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.18);
+        }
+
+        .chat-header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #6b7280;
         }
 
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 24px;
+            padding: 16px 18px 16px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
 
         .message {
-            max-width: 80%;
-            padding: 16px 20px;
-            border-radius: 18px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            animation: fadeIn 0.3s ease;
+            max-width: 82%;
+            padding: 12px 14px;
+            border-radius: 15px;
+            font-size: 0.87rem;
+            line-height: 1.5;
+            animation: fadeIn 0.22s ease;
         }
 
         .message.user {
@@ -222,40 +336,39 @@
 
         .message.ai {
             align-self: flex-start;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(15, 23, 42, 1);
             color: #e2e8f0;
             border-bottom-left-radius: 4px;
+            border: 1px solid rgba(148, 163, 184, 0.45);
         }
 
         .chat-input-container {
-            padding: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 14px 14px;
+            border-top: 1px solid rgba(30, 64, 175, 0.7);
+            background: radial-gradient(circle at top, rgba(30, 64, 175, 0.35), rgba(15, 23, 42, 0.96));
         }
 
         .chat-input-wrapper {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: flex-end;
         }
 
-        #file,
-        #question {
+        #file, #question {
             flex: 1;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
+            padding: 13px 14px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            border-radius: 14px;
             color: #e2e8f0;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            font-size: 0.86rem;
+            outline: none;
         }
 
-        #file:focus,
-        #question:focus {
-            background: rgba(255, 255, 255, 0.12);
+        #file:focus, #question:focus {
+            background: rgba(15, 23, 42, 0.98);
             border-color: #3b82f6;
-            outline: none;
+            box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.35);
         }
 
         .chat-buttons {
@@ -264,205 +377,233 @@
         }
 
         .btn {
-            padding: 12px 20px;
+            padding: 9px 13px;
             border: none;
             border-radius: 12px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.22s ease;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.9rem;
+            font-size: 0.84rem;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: white;
+            box-shadow: 0 10px 28px rgba(37, 99, 235, 0.65);
         }
 
-        .btn:hover {
+        .btn-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 16px 40px rgba(37, 99, 235, 0.9);
         }
 
         .status {
-            text-align: center;
-            padding: 20px;
+            text-align: left;
+            padding: 4px 4px 0;
             font-style: italic;
             color: #94a3b8;
-            margin-top: 12px;
+            margin-top: 4px;
+            font-size: 0.78rem;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            left: 16px;
+            bottom: 18px;
+            z-index: 40;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            border-radius: 999px;
+            padding: 8px 10px;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Mobile */
-        @media (max-width: 768px) {
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            .landing-grid {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+            .hero-preview { order: -1; }
+            .app-main { grid-template-columns: 1fr; }
             .sidebar {
-                width: 100%;
+                position: fixed;
+                left: 12px;
+                bottom: 58px;
+                right: 12px;
+                max-height: 220px;
+                transform: translateY(120%);
+                transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 35;
             }
-
-            .chat-container {
-                margin-left: 0;
-                height: 85vh;
-                border-radius: 16px;
-            }
-
-            .app-container {
-                padding: 20px 16px;
-            }
-
-            .chat-messages {
-                padding: 16px;
-            }
-
-            .message {
-                max-width: 95%;
-            }
-        }
-
-        /* Scrollbar */
-        .chat-messages::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .chat-messages::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
-        }
-
-        .chat-messages::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
+            .sidebar.open { transform: translateY(0); }
+            .sidebar-toggle { display: inline-flex; }
+            .chat-container { height: 75vh; }
         }
     </style>
 </head>
-
 <body>
-    <!-- Landing Page -->
+    <!-- TOP NAV -->
+    <header class="top-nav">
+        <div class="brand">
+            <div class="brand-icon"><i class="fas fa-file-alt"></i></div>
+            <span class="brand-name">DocAI</span>
+        </div>
+    </header>
+
+    <!-- LANDING -->
     <section class="landing" id="landing">
+        <div class="landing-gradient-orbit"></div>
         <div class="landing-grid">
-            <div class="hero-content">
-                <h1><i class="fas fa-file-alt"></i> DocAI</h1>
-                <p>Transform any document into your personal knowledge assistant. Upload, summarize, and ask intelligent questions with AI-powered precision.</p>
-                <button class="cta-button" onclick="startApp()">
-                    <i class="fas fa-rocket"></i>
-                    Get Started
-                </button>
+            <div class="hero-copy">
+                <div class="hero-badges">
+                    <div class="pill"><i class="fas fa-bolt"></i>AI-native</div>
+                    <div class="pill"><i class="fas fa-lock"></i>Private</div>
+                </div>
+                <h1>Turn any document into your **answer engine**</h1>
+                <p class="hero-sub">Upload PDFs, generate summaries, ask questions. Your personal research assistant powered by your Railway FastAPI backend.</p>
+                <div class="hero-cta-row">
+                    <button class="hero-primary-btn" onclick="startApp()">
+                        <i class="fas fa-rocket"></i> Start Now
+                    </button>
+                </div>
+            </div>
+            <div class="hero-preview">
+                <div class="glass-card">
+                    <div style="font-size:0.95rem;font-weight:600;margin-bottom:14px;">Live Preview</div>
+                    <div style="display:flex;gap:8px;margin-bottom:10px;font-size:0.72rem;">
+                        <div style="padding:5px 10px;border-radius:999px;background:rgba(59,130,246,0.2);border:1px solid rgba(59,130,246,0.5);">📁 Upload</div>
+                        <div style="padding:5px 10px;border-radius:999px;background:rgba(15,23,42,0.9);">📄 Summary</div>
+                        <div style="padding:5px 10px;border-radius:999px;background:rgba(15,23,42,0.9);">💬 Q&A</div>
+                    </div>
+                    <div style="margin-top:12px;">
+                        <div style="font-size:0.8rem;margin-bottom:8px;">research.pdf • 42 pages</div>
+                        <div style="background:rgba(59,130,246,0.15);padding:8px;border-radius:12px;font-size:0.82rem;margin-bottom:8px;">"Give me 3 key findings" → "1. 94% accuracy..."</div>
+                        <div style="display:flex;gap:8px;">
+                            <div style="flex:1;padding:6px 10px;border-radius:999px;border:1px solid rgba(148,163,184,0.5);background:rgba(15,23,42,0.95);font-size:0.75rem;">Ask anything...</div>
+                            <div style="width:28px;height:28px;border-radius:999px;background:linear-gradient(135deg,#3b82f6,#ec4899);display:flex;align-items:center;justify-content:center;color:white;font-size:0.8rem;">↑</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Main App -->
-    <div class="app-container" id="appContainer">
-        <div class="sidebar" id="sidebar">
-            <div class="nav-item active" data-section="upload">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <span>1. Upload Document</span>
-            </div>
-            <div class="nav-item" data-section="summary">
-                <i class="fas fa-file-text"></i>
-                <span>2. Generate Summary</span>
-            </div>
-            <div class="nav-item" data-section="chat">
-                <i class="fas fa-comments"></i>
-                <span>3. Ask Questions</span>
-            </div>
+    <!-- APP -->
+    <main class="app-container" id="appContainer">
+        <div class="app-header">
+            <h1>DocAI Workspace</h1>
+            <span>Upload → Summary → Ask (your Railway backend)</span>
         </div>
-
-        <div class="sidebar-toggle" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-        </div>
-
-        <!-- Upload Section -->
-        <div id="uploadSection" class="chat-container">
-            <div class="chat-header">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <span>Upload Document</span>
-            </div>
-            <div class="chat-messages">
-                <div class="message ai">
-                    <i class="fas fa-info-circle"></i> Drag & drop your document or click to browse. Supports PDF, DOCX, TXT.
+        <div class="app-main">
+            <!-- Sidebar -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-title">Workflow</div>
+                <div class="nav-item active" data-section="upload">
+                    <div class="nav-item-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <div><div>1. Upload</div><div class="nav-item-desc">Send to FastAPI</div></div>
                 </div>
-            </div>
-            <div class="chat-input-container">
-                <div class="chat-input-wrapper">
-                    <input type="file" id="file" accept=".pdf,.doc,.docx,.txt">
+                <div class="nav-item" data-section="summary">
+                    <div class="nav-item-icon"><i class="fas fa-file-text"></i></div>
+                    <div><div>2. Summary</div><div class="nav-item-desc">Generate insights</div></div>
+                </div>
+                <div class="nav-item" data-section="chat">
+                    <div class="nav-item-icon"><i class="fas fa-comments"></i></div>
+                    <div><div>3. Ask</div><div class="nav-item-desc">Context-aware Q&A</div></div>
+                </div>
+            </aside>
+
+            <!-- Upload -->
+            <section id="uploadSection" class="chat-container">
+                <div class="chat-header-bar">
+                    <div class="chat-header-left">
+                        <span class="status-dot"></span><span>Upload</span>
+                    </div>
+                    <div class="chat-header-right">
+                        <span><i class="fas fa-file-pdf"></i> PDF/DOCX/TXT</span>
+                    </div>
+                </div>
+                <div class="chat-messages">
+                    <div class="message ai"><i class="fas fa-info-circle"></i> Drag & drop or click. Files go to your Railway backend.</div>
+                </div>
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input type="file" id="file" accept=".pdf,.doc,.docx,.txt">
+                        <div class="chat-buttons">
+                            <button class="btn btn-primary" onclick="upload()">
+                                <i class="fas fa-upload"></i> Upload
+                            </button>
+                        </div>
+                    </div>
+                    <p id="uploadStatus" class="status"></p>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section id="summarySection" class="chat-container" style="display:none;">
+                <div class="chat-header-bar">
+                    <div class="chat-header-left">
+                        <span class="status-dot"></span><span>Summary</span>
+                    </div>
+                    <div class="chat-header-right">
+                        <span><i class="fas fa-sparkles"></i> AI Generated</span>
+                    </div>
+                </div>
+                <div class="chat-messages" id="summaryMessages">
+                    <div class="message ai">Ready to generate summary from your document.</div>
+                </div>
+                <div class="chat-input-container">
                     <div class="chat-buttons">
-                        <button class="btn btn-primary" onclick="upload()">
-                            <i class="fas fa-upload"></i> Upload
+                        <button class="btn btn-primary" onclick="getSummary()">
+                            <i class="fas fa-magic"></i> Generate Summary
                         </button>
                     </div>
                 </div>
-                <p id="uploadStatus" class="status"></p>
-            </div>
-        </div>
+            </section>
 
-        <!-- Summary Section -->
-        <div id="summarySection" class="chat-container" style="display: none;">
-            <div class="chat-header">
-                <i class="fas fa-file-text"></i>
-                <span>Document Summary</span>
-            </div>
-            <div class="chat-messages" id="summaryMessages">
-                <div class="message ai">
-                    Ready to generate a comprehensive summary of your document.
-                </div>
-            </div>
-            <div class="chat-input-container">
-                <div class="chat-buttons">
-                    <button class="btn btn-primary" onclick="getSummary()">
-                        <i class="fas fa-magic"></i> Generate Summary
-                    </button>
-                </div>
-                <div style="margin-top: 16px;">
-                    <div class="nav-item" onclick="showSection('chat')" style="justify-content: center; background: rgba(59,130,246,0.1);">
-                        <i class="fas fa-comments"></i>
-                        <span>Go to Ask Questions</span>
+            <!-- Chat -->
+            <section id="chatSection" class="chat-container" style="display:none;">
+                <div class="chat-header-bar">
+                    <div class="chat-header-left">
+                        <span class="status-dot"></span><span>Q&A</span>
+                    </div>
+                    <div class="chat-header-right">
+                        <span><i class="fas fa-brain"></i> Context-aware</span>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Chat Section -->
-        <div id="chatSection" class="chat-container" style="display: none;">
-            <div class="chat-header">
-                <i class="fas fa-comments"></i>
-                <span>Ask Questions</span>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="message ai">
-                    Document loaded! Ask any question about your document and get precise, context-aware answers.
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai">Document ready! Ask anything about your file.</div>
                 </div>
-            </div>
-            <div class="chat-input-container">
-                <div class="chat-input-wrapper">
-                    <input type="text" id="question" placeholder="Ask about your document... (e.g. What are the main points?)"
-                        onkeypress="handleEnter(event)">
-                    <div class="chat-buttons">
-                        <button class="btn btn-primary" onclick="ask()">
-                            <i class="fas fa-paper-plane"></i> Send
-                        </button>
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input type="text" id="question" placeholder="What are the main findings?" onkeypress="handleEnter(event)">
+                        <div class="chat-buttons">
+                            <button class="btn btn-primary" onclick="ask()">
+                                <i class="fas fa-paper-plane"></i> Send
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </div>
+        <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    </main>
 
     <script>
-        // YOUR RAILWAY BACKEND URL
         const API = "https://web-production-3de88.up.railway.app";
 
-        /* ---------- APP FLOW ---------- */
         function startApp() {
             document.getElementById('landing').style.display = 'none';
             document.getElementById('appContainer').style.display = 'block';
@@ -477,122 +618,73 @@
         function showSection(section) {
             document.querySelectorAll('.chat-container').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-
             document.getElementById(section + 'Section').style.display = 'flex';
             document.querySelector(`[data-section="${section}"]`).classList.add('active');
-            
-            // Close mobile sidebar
-            if (window.innerWidth <= 768) {
-                document.getElementById('sidebar').classList.remove('open');
-            }
+            if (window.innerWidth <= 960) document.getElementById('sidebar').classList.remove('open');
         }
 
-        /* ---------- NAVIGATION ---------- */
         document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                showSection(item.dataset.section);
-            });
+            item.addEventListener('click', () => showSection(item.dataset.section));
         });
 
-        /* ---------- UPLOAD ---------- */
         async function upload() {
             const file = document.getElementById("file").files[0];
-            if (!file) return showStatus("Please select a file first.", "error");
-
+            if (!file) return showStatus("Select a file first", "error");
             const formData = new FormData();
             formData.append("file", file);
-
-            showStatus("Uploading document...");
-
+            showStatus("Uploading...");
             try {
-                const res = await fetch(`${API}/upload`, { 
-                    method: "POST", 
-                    body: formData 
-                });
-
+                const res = await fetch(`${API}/upload`, { method: "POST", body: formData });
                 if (res.ok) {
-                    showStatus("✅ Document uploaded successfully! Click 'Generate Summary' to continue.", "success");
-                    addSummaryMessage("Document uploaded successfully. Ready to generate summary.");
-                    // STAY ON UPLOAD - Don't auto switch
+                    showStatus("✅ Uploaded! Click Generate Summary →", "success");
                 } else {
-                    const errorText = await res.text().catch(() => "Unknown error");
-                    showStatus(`❌ Upload failed: ${errorText.slice(0, 100)}`, "error");
+                    const err = await res.text();
+                    showStatus(`❌ Upload failed: ${err.slice(0,100)}`, "error");
                 }
-            } catch (err) {
-                console.error(err);
-                showStatus("❌ Server not reachable. Check your Railway backend.", "error");
+            } catch(err) {
+                showStatus("❌ Backend unreachable", "error");
             }
         }
 
-        /* ---------- SUMMARY (STAYS ON SUMMARY PAGE) ---------- */
         async function getSummary() {
-            addSummaryMessage("Generating summary...");
-
+            addSummaryMessage("Generating...");
             try {
                 const res = await fetch(`${API}/summary`);
+                if (!res.ok) throw new Error(await res.text());
+                const data = await res.json();
+                addSummaryMessage(data.summary || "Summary ready!");
+            } catch(err) {
+                addSummaryMessage(`❌ Error: ${err.message.slice(0,100)}`);
+            }
+        }
+
+        async function ask() {
+            const q = document.getElementById("question").value.trim();
+            if (!q) return;
+            const thinking = addChatMessage("ai", "Thinking...");
+            document.getElementById("question").value = "";
+            addChatMessage("user", q);
+            
+            try {
+                const formData = new FormData();
+                formData.append("question", q);
+                const res = await fetch(`${API}/ask`, { method: "POST", body: formData });
+                document.getElementById("chatMessages").removeChild(thinking);
                 
                 if (!res.ok) {
-                    const errorText = await res.text().catch(() => "Unknown error");
-                    addSummaryMessage(`❌ Summary failed: ${errorText.slice(0, 100)}`);
+                    const err = await res.text();
+                    addChatMessage("ai", `❌ ${res.status}: ${err.slice(0,100)}`);
                     return;
                 }
                 
                 const data = await res.json();
-                addSummaryMessage(data.summary || "Summary generated successfully!");
-                
-                // STAY ON SUMMARY - Don't auto-switch to chat
-                showStatus("✅ Summary complete! Use sidebar to go to 'Ask Questions'.", "success");
-                
-            } catch (err) {
-                console.error(err);
-                addSummaryMessage("❌ Failed to generate summary. Check backend connection.");
+                addChatMessage("ai", data.answer || "No answer");
+            } catch(err) {
+                document.getElementById("chatMessages").removeChild(thinking);
+                addChatMessage("ai", `❌ Network error`);
             }
         }
 
-        /* ---------- FIXED ASK (POST JSON BODY) ---------- */
-        /* ---------- FIXED ASK (FormData - matches your backend) ---------- */
-async function ask() {
-    const q = document.getElementById("question").value.trim();
-    if (!q) return;
-
-    addChatMessage("user", q);
-    document.getElementById("question").value = "";
-
-    const thinkingMsg = addChatMessage("ai", "Thinking...");
-
-    try {
-        // FIXED: Use FormData (your backend expects this)
-        const formData = new FormData();
-        formData.append("question", q);
-
-        const res = await fetch(`${API}/ask`, {
-            method: "POST",
-            body: formData  // No Content-Type header - let browser set multipart/form-data
-        });
-
-        // Remove thinking message
-        const chatMessages = document.getElementById("chatMessages");
-        chatMessages.removeChild(thinkingMsg);
-
-        if (!res.ok) {
-            const errorText = await res.text().catch(() => "Unknown error");
-            addChatMessage("ai", `❌ Error ${res.status}: ${errorText.slice(0, 150)}`);
-            return;
-        }
-
-        const data = await res.json();
-        addChatMessage("ai", data.answer || data.response || "No answer returned.");
-        
-    } catch (err) {
-        console.error(err);
-        const chatMessages = document.getElementById("chatMessages");
-        chatMessages.removeChild(thinkingMsg);
-        addChatMessage("ai", "❌ Network error. Check backend.");
-    }
-}
-
-
-        /* ---------- MESSAGE HELPERS ---------- */
         function addChatMessage(role, text) {
             const chat = document.getElementById("chatMessages");
             const div = document.createElement("div");
@@ -613,20 +705,13 @@ async function ask() {
         }
 
         function showStatus(text, type = "") {
-            const statusEl = document.getElementById("uploadStatus");
-            statusEl.textContent = text;
-            statusEl.className = `status ${type}`;
+            document.getElementById("uploadStatus").textContent = text;
         }
 
         function handleEnter(e) {
             if (e.key === "Enter") ask();
         }
-
-        /* ---------- INIT ---------- */
-        document.addEventListener("DOMContentLoaded", () => {
-            // Auto-show upload on load (no login needed)
-            showSection('upload');
-        });
     </script>
 </body>
 </html>
+
