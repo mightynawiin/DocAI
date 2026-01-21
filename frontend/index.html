@@ -1651,35 +1651,44 @@
 
         /* ---------- ASK ---------- */
         async function ask() {
-            const qInput = document.getElementById("question");
-            const q = qInput.value.trim();
-            if (!q) return;
+    const qInput = document.getElementById("question");
+    const q = qInput.value.trim();
+    if (!q) return;
 
-            addChatMessage("user", q);
-            qInput.value = "";
+    addChatMessage("user", q);
+    qInput.value = "";
 
-            const thinking = addChatMessage("ai", "Thinking…");
+    const thinking = addChatMessage("ai", "Thinking…");
 
-            try {
-                const res = await fetch(`${API}/ask?question=${encodeURIComponent(q)}`, {
-                    method: "POST"
-                });
-                if (!res.ok) {
-                    const t = await res.text().catch(() => "");
-                    console.error("Ask error:", t);
-                    removeChatMessage(thinking);
-                    addChatMessage("ai", "Error processing your question. Check /ask endpoint.");
-                    return;
-                }
-                const data = await res.json();
-                removeChatMessage(thinking);
-                addChatMessage("ai", data.answer || "Backend did not return an answer field.");
-            } catch (err) {
-                console.error(err);
-                removeChatMessage(thinking);
-                addChatMessage("ai", "Error contacting backend. Verify your Railway URL is live.");
-            }
+    try {
+        // FIXED: Send as POST body JSON instead of query param
+        const res = await fetch(`${API}/ask`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ question: q })
+        });
+
+        if (!res.ok) {
+            const errorText = await res.text().catch(() => "");
+            console.error("Ask error response:", res.status, errorText);
+            removeChatMessage(thinking);
+            addChatMessage("ai", `Error ${res.status}: Check backend /ask logs. Response: ${errorText.slice(0, 100)}`);
+            return;
         }
+
+        const data = await res.json();
+        removeChatMessage(thinking);
+        addChatMessage("ai", data.answer || data.response || "Backend returned no answer field.");
+        
+    } catch (err) {
+        console.error("Network error:", err);
+        removeChatMessage(thinking);
+        addChatMessage("ai", "Network error. Verify Railway URL and CORS settings.");
+    }
+}
+
 
         /* ---------- MESSAGE HELPERS ---------- */
         function addChatMessage(role, text) {
