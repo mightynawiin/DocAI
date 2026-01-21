@@ -550,44 +550,47 @@
         }
 
         /* ---------- FIXED ASK (POST JSON BODY) ---------- */
-        async function ask() {
-            const q = document.getElementById("question").value.trim();
-            if (!q) return;
+        /* ---------- FIXED ASK (FormData - matches your backend) ---------- */
+async function ask() {
+    const q = document.getElementById("question").value.trim();
+    if (!q) return;
 
-            addChatMessage("user", q);
-            document.getElementById("question").value = "";
+    addChatMessage("user", q);
+    document.getElementById("question").value = "";
 
-            const thinkingMsg = addChatMessage("ai", "Thinking...");
+    const thinkingMsg = addChatMessage("ai", "Thinking...");
 
-            try {
-                const res = await fetch(`${API}/ask`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ question: q })
-                });
+    try {
+        // FIXED: Use FormData (your backend expects this)
+        const formData = new FormData();
+        formData.append("question", q);
 
-                // Remove thinking message
-                const chatMessages = document.getElementById("chatMessages");
-                chatMessages.removeChild(thinkingMsg);
+        const res = await fetch(`${API}/ask`, {
+            method: "POST",
+            body: formData  // No Content-Type header - let browser set multipart/form-data
+        });
 
-                if (!res.ok) {
-                    const errorText = await res.text().catch(() => "Unknown error");
-                    addChatMessage("ai", `❌ Error ${res.status}: ${errorText.slice(0, 100)}`);
-                    return;
-                }
+        // Remove thinking message
+        const chatMessages = document.getElementById("chatMessages");
+        chatMessages.removeChild(thinkingMsg);
 
-                const data = await res.json();
-                addChatMessage("ai", data.answer || data.response || "No answer returned from backend.");
-                
-            } catch (err) {
-                console.error(err);
-                const chatMessages = document.getElementById("chatMessages");
-                chatMessages.removeChild(thinkingMsg);
-                addChatMessage("ai", "❌ Network error. Check Railway backend URL.");
-            }
+        if (!res.ok) {
+            const errorText = await res.text().catch(() => "Unknown error");
+            addChatMessage("ai", `❌ Error ${res.status}: ${errorText.slice(0, 150)}`);
+            return;
         }
+
+        const data = await res.json();
+        addChatMessage("ai", data.answer || data.response || "No answer returned.");
+        
+    } catch (err) {
+        console.error(err);
+        const chatMessages = document.getElementById("chatMessages");
+        chatMessages.removeChild(thinkingMsg);
+        addChatMessage("ai", "❌ Network error. Check backend.");
+    }
+}
+
 
         /* ---------- MESSAGE HELPERS ---------- */
         function addChatMessage(role, text) {
