@@ -3,7 +3,7 @@
 > ![FastAPI](https://img.shields.io/badge/FastAPI-%23009688.svg?style=for-the-badge&logo=fastapi&logoColor=white) ![Groq](https://img.shields.io/badge/Groq-%2300D2FF.svg?style=for-the-badge&logo=openai&logoColor=white) ![Railway](https://img.shields.io/badge/Railway-%230276b8.svg?style=for-the-badge&logo=railway&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white) ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)
 
 <div align="center">
-![Cover Page](https://via.placeholder.com/1200x630/1e293b/3b82f6?text=DocAI+-+Your+Document+Research+Assistant)
+(assets/img1.png)
 </div>
 
 ---
